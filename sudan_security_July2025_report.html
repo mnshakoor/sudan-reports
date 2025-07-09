@@ -461,6 +461,88 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+
+<!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
+
+  <style>
+    #map {
+      height: 500px;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-slate-800">
+
+  <main class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-8">Conflict Hotspots & Refugee Flows (Real Map)</h2>
+    <p class="text-center text-slate-600 mb-4 max-w-3xl mx-auto">
+      This map shows real locations with markers you can click for conflict and refugee context.
+    </p>
+
+    <!-- Leaflet Map -->
+    <div id="map"></div>
+  </main>
+
+  <script>
+    // 1️⃣ Initialize map
+    const map = L.map('map').setView([15.5, 30.0], 5);
+
+    // 2️⃣ Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // 3️⃣ Add markers for regions
+    const markers = [
+      {
+        coords: [13.62, 25.35],
+        popup: '<b>Darfur Region</b><br>Escalating communal violence, RSF attacks. El Fasher siege.'
+      },
+      {
+        coords: [12.0, 29.0],
+        popup: '<b>Kordofan Region</b><br>Artillery, drone strikes, SAF siege battles.'
+      },
+      {
+        coords: [15.5, 32.6],
+        popup: '<b>Khartoum</b><br>Retaken by SAF. Ongoing retaliatory violence and cholera outbreak.'
+      },
+      {
+        coords: [19.6, 37.2],
+        popup: '<b>Port Sudan</b><br>SAF’s wartime hub. Targeted by RSF drone strikes.'
+      },
+      {
+        coords: [26.8, 30.8],
+        popup: '<b>Egypt</b><br>Hosts 1.5M Sudanese refugees.'
+      },
+      {
+        coords: [12.1, 18.0],
+        popup: '<b>Chad</b><br>726,000 refugees, strained east provinces.'
+      },
+      {
+        coords: [7.5, 30.0],
+        popup: '<b>South Sudan</b><br>1.5M Sudanese + returnees, strained resources.'
+      }
+    ];
+
+    markers.forEach(({ coords, popup }) => {
+      L.marker(coords).addTo(map).bindPopup(popup);
+    });
+  </script>
+    
     <iframe 
   src="https://docs.google.com/document/d/1A9f86hcK5whSlJasMUkj1k9xtCLpPCvkU8Z3q_3_RwI/preview" 
   width="100%" 
